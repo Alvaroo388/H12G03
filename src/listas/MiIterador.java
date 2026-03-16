@@ -1,6 +1,6 @@
 package listas;
 //Interfaz para el iterador
-public class MiIterador<T> {
+public interface MiIterador<T> {
     boolean hasNext();
     T next();
 }
