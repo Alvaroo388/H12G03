@@ -1,7 +1,7 @@
 public class ElementoDE<T> {
-    private T dato;
-    private ElementoDE<T> anterior;
-    private ElementoDE<T> siguiente;
+    protected T dato;
+    protected ElementoDE<T> anterior;
+    protected ElementoDE<T> siguiente;
 
     public ElementoDE(T dato) {
         this.dato = dato;

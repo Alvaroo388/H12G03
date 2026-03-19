@@ -1,6 +1,5 @@
 public class ListaDE<T extends Comparable<T>> implements Lista<T>{
-    protected ElementoDE<T> primero;
-    protected ElementoDE<T> ultimo;
+    protected ElementoDE<T> primero,ultimo;
     protected int size;
 
     public ListaDE() {

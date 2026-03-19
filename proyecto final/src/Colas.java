@@ -3,7 +3,7 @@ public interface Colas<T extends Comparable<T>>{
     public T poll();
     public T peek();
     public boolean isEmpty();
-    public int getTamaño();
+    public int getSize();
     public void clear();
     public boolean contains(T dato);
     public String toString();
