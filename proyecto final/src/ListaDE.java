@@ -82,4 +82,22 @@ public class ListaDE<T extends Comparable<T>> implements Lista<T>{
     public boolean existeDato(T dato){
         return get(dato) != null; // Si get devuelve algo distinto de null, existe fel dato
     }
+
+
+    @Override
+    public String toString() {
+        String texto = "[";
+        ElementoDE<T> actual = primero;
+
+        while (actual != null) {
+            texto += actual.getDato();
+            if (actual.getSiguiente() != null) {
+                texto += ", ";
+            }
+            actual = actual.getSiguiente();
+        }
+
+        texto += "]";
+        return texto;
+    }
 }

@@ -90,6 +90,22 @@ public class ListaSE<T extends Comparable<T>> implements Lista<T> {
         }
         primero = anterior; // Al terminar, anterior apunta al nuevo primero de la lista
     }
+    @Override
+    public String toString() {
+        String texto = "[";
+        ElementoSE<T> actual = primero;
+
+        while (actual != null) {
+            texto += actual.getDato();
+            if (actual.getSiguiente()!= null) {
+                texto += ", ";
+            }
+            actual = actual.getSiguiente();
+        }
+
+        texto += "]";
+        return texto;
+    }
 
 
 }
