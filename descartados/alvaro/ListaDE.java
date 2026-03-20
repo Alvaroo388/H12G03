@@ -5,7 +5,7 @@ public class ListaDE<T extends Comparable<T>> implements Lista<T>{
     protected ElementoDE<T> ultimo;
     protected int size;
 
-    public ListaDE() {
+    public ListaDE() { // Constructor, crea una lista vacía
         this.primero = null;
         this.ultimo = null;
         this.size = 0;
@@ -14,17 +14,17 @@ public class ListaDE<T extends Comparable<T>> implements Lista<T>{
 
     @Override
     public void add(T dato) {
-        ElementoDE<T> nuevo = new ElementoDE<>(dato);
-        if (primero == null){
+        ElementoDE<T> nuevo = new ElementoDE<>(dato); // Creamos un nuevo nodo con el dato
+        if (primero == null){ // Si la lista está vacía, el nuevo nodo será el primero y el último
             primero = nuevo;
             ultimo = nuevo;
-        }else{
+        }else{ //Si no está vacía, insertamos al principio
             primero.setAnterior(nuevo);
             nuevo.setSiguiente(primero);
             primero = nuevo;
 
         }
-        size++;
+        size++; // Si no está vacía, insertamos al principio
 
     }
 
@@ -37,7 +37,7 @@ public class ListaDE<T extends Comparable<T>> implements Lista<T>{
             }
             actual = actual.getSiguiente();
         }
-        return null;
+        return null; // Si no está, devolvemos null
     }
 
     @Override
@@ -45,21 +45,21 @@ public class ListaDE<T extends Comparable<T>> implements Lista<T>{
         ElementoDE<T> actual = primero;
         while (actual != null){
             if (actual.getDato().compareTo(dato) == 0){
-                if (actual.getAnterior() == null){
+                if (actual.getAnterior() == null){ // Borrar el primero
                     primero = actual.getSiguiente();
                     if (primero != null){
                         primero.setAnterior(null);
                     }else{
                         ultimo = null;
                     }
-                } else if (actual.getSiguiente() == null){
+                } else if (actual.getSiguiente() == null){ // Borrar el último
                     ultimo = actual.getAnterior();
                     ultimo.setSiguiente(null);
-                } else {
+                } else { // Borrar uno del medio
                     actual.getAnterior().setSiguiente(actual.getSiguiente());
                     actual.getSiguiente().setAnterior(actual.getAnterior());
                 }
-                size--;
+                size--; // Disminuimos el tamaño
                 return actual.getDato();
             }
             actual = actual.getSiguiente();
