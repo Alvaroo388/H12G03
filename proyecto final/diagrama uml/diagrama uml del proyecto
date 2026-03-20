@@ -1,4 +1,5 @@
 @startuml
+skinparam classAttributeIconSize 0
 skinparam linetype ortho
 top to bottom direction
 
@@ -6,10 +7,16 @@ title Proyecto Estructuras de Datos
 
 interface Lista<T> {
   +add(dato: T)
+  +addLast(dato: T)
   +get(dato: T): T
+  +get(posicion: int): T
   +del(dato: T): T
+  +delFirst(): T
+  +delLast(): T
   +isEmpty(): boolean
   +getSize(): int
+  +clear(): void
+  +copy(): Lista<T>
   +getIterador(): MiIterador<T>
 }
 
@@ -67,6 +74,8 @@ class ListaDE<T> {
   #ultimo: ElementoDE<T>
   #size: int
   +existeDato(dato: T): boolean
+  +getPrimero(): T
+  +getUltimo(): T
 }
 
 class ListaCircular<T> {
@@ -156,4 +165,5 @@ Main ..> Lista : usa
 Main ..> Pilas : usa
 Main ..> Colas : usa
 Main ..> InterfazListaCircular : usa
+
 @enduml
