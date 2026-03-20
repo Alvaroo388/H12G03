@@ -120,6 +120,7 @@ public class ListaDE<T extends Comparable<T>> implements Lista<T>{
         if (ultimo == null) return null;
         return ultimo.getDato();
     }
+    @Override
     public void clear() { // limpia la lista
         primero = null;
         ultimo = null;

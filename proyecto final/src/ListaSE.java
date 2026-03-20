@@ -25,7 +25,7 @@ public class ListaSE<T extends Comparable<T>> implements Lista<T> {
 
     @Override
     public T get(T dato) {
-        ElementoSE<T> actual = primero; // // Empezamos a recorrer desde el primer nodo
+        ElementoSE<T> actual = primero; //Empezamos a recorrer desde el primer nodo
         while (actual != null){
 
             if (actual.getDato().compareTo(dato) == 0){
@@ -160,9 +160,6 @@ public class ListaSE<T extends Comparable<T>> implements Lista<T> {
     public void clear() {
         primero = null; // Eliminamos la referencia al primer nodo
         size = 0;       // Reiniciamos el tamaño
-    }
-    public boolean contains(T dato) {
-        return get(dato) != null; // Si existe, get no devuelve null
     }
     public ListaSE<T> copy() {
         ListaSE<T> copia = new ListaSE<>(); // Nueva lista vacía
