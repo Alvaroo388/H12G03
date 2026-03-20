@@ -45,7 +45,7 @@ public class Main {
             System.out.println(it2.next());
         }
 
-        // ===LISTA DOBLE ===
+        // ================= LISTA DOBLE =================
         System.out.println("\n===== LISTA DE =====");
         ListaDE<Alumno> listaDE = new ListaDE<>();
 
@@ -132,7 +132,7 @@ public class Main {
         System.out.println(itSE.hasNext());
         System.out.println(itSE.next());
 
-        // === ITERADOR DOBLE ====
+        // === ITERADOR DOBLE
         System.out.println("\n===== ITERADOR DE =====");
 
         // Creamos nodos dobles
@@ -165,7 +165,7 @@ public class Main {
         System.out.println(itDE.next());
 
         // === ITERADOR CIRCULAR ===
-        System.out.println("\n=== ITERADOR CIRCULAR ===");
+        System.out.println("\n===== ITERADOR CIRCULAR =====");
 
         // Creamos nodos circulares
         NodoCircular<Alumno> n1 = new NodoCircular<>(a1);
@@ -248,7 +248,7 @@ public class Main {
         System.out.println(cola);
         System.out.println(cola.isEmpty());
 
-        // === PILA ===
+        // PILA
         System.out.println("\n===== PILA =====");
         Pila<Alumno> pila = new Pila<>();
 

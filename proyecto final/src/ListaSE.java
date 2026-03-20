@@ -106,6 +106,74 @@ public class ListaSE<T extends Comparable<T>> implements Lista<T> {
         texto += "]";
         return texto;
     }
+    public void addLast(T dato) {
+        ElementoSE<T> nuevo = new ElementoSE<>(dato); // Creamos el nuevo nodo
+
+        if (primero == null) { // Si la lista está vacía
+            primero = nuevo;   // El nuevo nodo es el primero
+        } else {
+            ElementoSE<T> actual = primero;
+            while (actual.getSiguiente() != null) { // Recorremos hasta el último nodo
+                actual = actual.getSiguiente();
+            }
+            actual.setSiguiente(nuevo); // El último apunta al nuevo
+        }
+        size++;
+    }
+    public T get(int posicion) {
+        if (posicion < 0 || posicion >= size) return null;
+        // Si la posición no es válida
+        ElementoSE<T> actual = primero;
+        int i = 0;
+        // Avanzamos hasta la posición deseada
+        while (i < posicion) {
+            actual = actual.getSiguiente();
+            i++;
+        }
+        return actual.getDato(); // Devolvemos el dato encontrado
+    }
+
+    public T delFirst() {
+        if (primero == null) return null; // Lista vacía
+        T dato = primero.getDato(); // Guardamos el dato a devolver
+        primero = primero.getSiguiente(); // El segundo pasa a ser el primero
+        size--;
+        return dato;
+    }
+    public T delLast() {
+        if (primero == null) return null; // Lista vacía
+        if (primero.getSiguiente() == null) { // Si solo hay un elemento
+            T dato = primero.getDato();
+            primero = null;
+            size--;
+            return dato;
+        }
+        ElementoSE<T> actual = primero;
+        while (actual.getSiguiente().getSiguiente() != null) { // Recorremos hasta el penúltimo nodo
+            actual = actual.getSiguiente();
+        }
+        T dato = actual.getSiguiente().getDato(); // Guardamos el último
+        actual.setSiguiente(null); // Cortamos el enlace
+        size--;
+        return dato;
+    }
+    public void clear() {
+        primero = null; // Eliminamos la referencia al primer nodo
+        size = 0;       // Reiniciamos el tamaño
+    }
+    public boolean contains(T dato) {
+        return get(dato) != null; // Si existe, get no devuelve null
+    }
+    public ListaSE<T> copy() {
+        ListaSE<T> copia = new ListaSE<>(); // Nueva lista vacía
+        ElementoSE<T> actual = primero;
+        while (actual != null) {
+            copia.addLast(actual.getDato()); // Usamos addLast para no invertir
+
+            actual = actual.getSiguiente();
+        }
+        return copia;
+    }
 
 
 }

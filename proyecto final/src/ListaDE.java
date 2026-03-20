@@ -8,7 +8,18 @@ public class ListaDE<T extends Comparable<T>> implements Lista<T>{
         this.size = 0;
     }
 
-
+    public void addLast(T dato) { // añade al final
+        ElementoDE<T> nuevo = new ElementoDE<>(dato); // Creamos el nodo
+        if (ultimo == null) { // Lista vacía
+            primero = nuevo;
+            ultimo = nuevo;
+        } else {
+            ultimo.setSiguiente(nuevo); // El último apunta al nuevo
+            nuevo.setAnterior(ultimo); // El nuevo apunta hacia atrás
+            ultimo = nuevo; // Actualizamos el último
+        }
+        size++;
+    }
     @Override
     public void add(T dato) {
         ElementoDE<T> nuevo = new ElementoDE<>(dato); // Creamos un nuevo nodo con el dato
@@ -100,4 +111,70 @@ public class ListaDE<T extends Comparable<T>> implements Lista<T>{
         texto += "]";
         return texto;
     }
+    public T getPrimero() { // devuelve el dato del primer elemento
+        if (primero == null) return null;
+        return primero.getDato();
+    }
+
+    public T getUltimo() { // devuelve el dato del último elemento
+        if (ultimo == null) return null;
+        return ultimo.getDato();
+    }
+    public void clear() { // limpia la lista
+        primero = null;
+        ultimo = null;
+        size = 0;
+    }
+    public T get(int posicion) {
+        if (posicion < 0 || posicion >= size) return null; // si la posicion no está entre 0 y el tamaño, devuelve null
+
+        ElementoDE<T> actual = primero;
+        int i = 0;
+
+        while (i < posicion) { // recorremos hasta llegar al elemento buscado
+            actual = actual.getSiguiente();
+            i++;
+        }
+        return actual.getDato();
+    }
+
+    public T delFirst() { // borra el primer element
+        if (primero == null) return null;
+        T dato = primero.getDato();
+        primero = primero.getSiguiente();
+
+        if (primero != null) {
+            primero.setAnterior(null);
+        } else {
+            ultimo = null;
+        }
+        size--; // Disminuimos el tamaño
+        return dato;
+    }
+    public T delLast() { // borra el último element
+        if (ultimo == null) return null;
+        T dato = ultimo.getDato();
+        ultimo = ultimo.getAnterior();
+        if (ultimo != null) {
+            ultimo.setSiguiente(null);
+        } else {
+            primero = null;
+        }
+        size--;  // Disminuimos el tamaño
+        return dato;
+    }
+    public ListaDE<T> copy() {
+        ListaDE<T> copia = new ListaDE<>(); // Creamos una nueva lista vacía
+
+        ElementoDE<T> actual = primero; // Empezamos desde el primer nodo de la lista original
+
+        while (actual != null) { // Recorremos toda la lista
+            copia.addLast(actual.getDato()); // Añadimos cada dato al final de la copia(para no invertirla)
+            actual = actual.getSiguiente(); // Avanzamos al siguiente nodo
+        }
+
+        return copia; // Devolvemos la nueva lista copiada
+    }
+
+
 }
