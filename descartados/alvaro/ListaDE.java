@@ -24,7 +24,7 @@ public class ListaDE<T extends Comparable<T>> implements Lista<T>{
             primero = nuevo;
 
         }
-        size++; // Si no está vacía, insertamos al principio
+        size++;
 
     }
 
