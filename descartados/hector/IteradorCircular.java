@@ -1,3 +1,5 @@
+package es.uah.eedd.listas.ListaCircular;
+
 // Clase que implementa un iterador para recorrer una lista circular
 public class IteradorCircular<T extends Comparable<T>> implements InterfazIteradorCircular<T> {
 

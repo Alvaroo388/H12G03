@@ -1,3 +1,5 @@
+package es.uah.eedd.listas.ListaCircular;
+
 // Implementación de una lista circular genérica cuyos elementos se pueden comparar
 public class ListaCircular<T extends Comparable<T>> implements InterfazListaCircular<T> {
 
