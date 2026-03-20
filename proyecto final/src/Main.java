@@ -1,340 +1,304 @@
 public class Main {
 
     public static void main(String[] args) {
+        // Creamos varios alumnos para hacer las pruebas
+        Alumno a1 = new Alumno("111A", "Héctor", 8.2);
+        Alumno a2 = new Alumno("222B", "Álvaro", 7.1);
+        Alumno a3 = new Alumno("333C", "Guillermo", 9.0);
+        Alumno a4 = new Alumno("444D", "Lucía", 6.8);
+        Alumno a5 = new Alumno("555E", "Marta", 7.9);
 
-        Alumno a1 = new Alumno("111A", "Lucia", 8.5);
-        Alumno a2 = new Alumno("222B", "Carlos", 6.7);
-        Alumno a3 = new Alumno("333C", "Marta", 9.1);
-        Alumno a4 = new Alumno("444D", "Pablo", 7.3);
+        // === LISTA SIMPLE ===
+        System.out.println("=== LISTA SE ===");
+        ListaSE<Alumno> listaSE = new ListaSE<>();
 
-        System.out.println("====================================");
-        System.out.println("PRUEBAS CON ALUMNO");
-        System.out.println("====================================");
+        // Probamos métodos con la lista vacía
+        System.out.println(listaSE.isEmpty());
+        System.out.println(listaSE.getSize());
+        System.out.println(listaSE.get(a1));
+        System.out.println(listaSE.del(a1));
+        System.out.println(listaSE.existeDato(a1));
 
-        probarListaSE(a1, a2, a3);
-        probarListaDE(a1, a2, a3);
-        probarListaCircular(a1, a2, a3);
+        // Añadimos elementos
+        listaSE.add(a1);
+        listaSE.add(a2);
+        listaSE.add(a3);
 
-        probarIteradorSE(a1, a2, a3);
-        probarIteradorDE(a1, a2, a3);
-        probarIteradorCircular(a1, a2, a3);
+        // Probamos métodos con elementos dentro
+        System.out.println(listaSE.isEmpty());
+        System.out.println(listaSE.getSize());
+        System.out.println(listaSE.get(a2));
+        System.out.println(listaSE.existeDato(a1));
+        System.out.println(listaSE.del(a2));
 
-        probarCola(a1, a2, a3, a4);
-        probarPila(a1, a2, a3, a4);
-    }
+        // Recorremos la lista con el iterador
+        MiIterador<Alumno> it1 = listaSE.getIterador();
+        while (it1.hasNext()) {
+            System.out.println(it1.next());
+        }
 
-    // =========================
-    // LISTA SIMPLE
-    // =========================
-    public static void probarListaSE(Alumno a1, Alumno a2, Alumno a3) {
-        System.out.println("\n----- PRUEBA ListaSE -----");
+        // Invertimos la lista y la volvemos a mostrar
+        listaSE.invertir();
+        System.out.println("ListaSE invertida:");
+        MiIterador<Alumno> it2 = listaSE.getIterador();
+        while (it2.hasNext()) {
+            System.out.println(it2.next());
+        }
 
-        ListaSE<Alumno> lista = new ListaSE<>();
+        // ================= LISTA DOBLE =================
+        System.out.println("\n===== LISTA DE =====");
+        ListaDE<Alumno> listaDE = new ListaDE<>();
 
-        System.out.println("isEmpty inicial: " + lista.isEmpty());
-        System.out.println("getSize inicial: " + lista.getSize());
-        System.out.println("get(a1) vacía: " + lista.get(a1));
-        System.out.println("del(a1) vacía: " + lista.del(a1));
-        System.out.println("existeDato(a1) vacía: " + lista.existeDato(a1));
+        // Probamos con la lista vacía
+        System.out.println(listaDE.isEmpty());
+        System.out.println(listaDE.getSize());
+        System.out.println(listaDE.get(a1));
+        System.out.println(listaDE.del(a1));
+        System.out.println(listaDE.existeDato(a1));
 
-        lista.add(a1);
-        lista.add(a2);
-        lista.add(a3);
+        // Añadimos elementos
+        listaDE.add(a1);
+        listaDE.add(a2);
+        listaDE.add(a3);
 
-        System.out.print("Lista tras add: ");
-        imprimirIterador(lista.getIterador());
+        // Probamos sus métodos
+        System.out.println(listaDE.isEmpty());
+        System.out.println(listaDE.getSize());
+        System.out.println(listaDE.get(a2));
+        System.out.println(listaDE.existeDato(a3));
+        System.out.println(listaDE.del(a3));
+        System.out.println(listaDE.del(a1));
 
-        System.out.println("get(a2): " + lista.get(a2));
-        System.out.println("existeDato(a1): " + lista.existeDato(a1));
-        System.out.println("getSize: " + lista.getSize());
+        // Mostramos el contenido restante
+        MiIterador<Alumno> it3 = listaDE.getIterador();
+        while (it3.hasNext()) {
+            System.out.println(it3.next());
+        }
 
-        System.out.println("del(a2): " + lista.del(a2));
-        System.out.print("Lista tras del(a2): ");
-        imprimirIterador(lista.getIterador());
+        // === LISTA CIRCULAR ===
+        System.out.println("\n===== LISTA CIRCULAR =====");
+        ListaCircular<Alumno> listaC = new ListaCircular<>();
 
-        lista.invertir();
-        System.out.print("Lista tras invertir(): ");
-        imprimirIterador(lista.getIterador());
-    }
+        // Probamos con la lista circular vacía
+        System.out.println(listaC.isEmpty());
+        System.out.println(listaC.getSize());
+        System.out.println(listaC.get(a1));
+        System.out.println(listaC.del(a1));
 
-    // =========================
-    // LISTA DOBLE
-    // =========================
-    public static void probarListaDE(Alumno a1, Alumno a2, Alumno a3) {
-        System.out.println("\n----- PRUEBA ListaDE -----");
+        // Añadimos elementos
+        listaC.add(a1);
+        listaC.add(a2);
+        listaC.add(a3);
 
-        ListaDE<Alumno> lista = new ListaDE<>();
+        // Probamos métodos principales
+        System.out.println(listaC.isEmpty());
+        System.out.println(listaC.getSize());
+        System.out.println(listaC.get(a2));
+        System.out.println(listaC.del(a1));
 
-        System.out.println("isEmpty inicial: " + lista.isEmpty());
-        System.out.println("getSize inicial: " + lista.getSize());
-        System.out.println("get(a1) vacía: " + lista.get(a1));
-        System.out.println("del(a1) vacía: " + lista.del(a1));
-        System.out.println("existeDato(a1) vacía: " + lista.existeDato(a1));
+        // Recorremos la lista circular
+        InterfazIteradorCircular<Alumno> itC1 = listaC.iteratorCircular();
+        while (itC1.hasNext()) {
+            System.out.println(itC1.next());
+        }
 
-        lista.add(a1);
-        lista.add(a2);
-        lista.add(a3);
+        // Eliminamos lo que queda para comprobar que funciona
+        System.out.println(listaC.del(a3));
+        System.out.println(listaC.del(a2));
+        System.out.println(listaC.isEmpty());
 
-        System.out.print("Lista tras add: ");
-        imprimirIterador(lista.getIterador());
+        // === ITERADOR SIMPLE ===
+        System.out.println("\n===== ITERADOR SE =====");
 
-        System.out.println("get(a2): " + lista.get(a2));
-        System.out.println("existeDato(a3): " + lista.existeDato(a3));
-        System.out.println("getSize: " + lista.getSize());
-
-        System.out.println("del(a3): " + lista.del(a3));
-        System.out.print("Lista tras del(a3): ");
-        imprimirIterador(lista.getIterador());
-
-        System.out.println("del(a1): " + lista.del(a1));
-        System.out.print("Lista tras del(a1): ");
-        imprimirIterador(lista.getIterador());
-    }
-
-    // =========================
-    // LISTA CIRCULAR
-    // =========================
-    public static void probarListaCircular(Alumno a1, Alumno a2, Alumno a3) {
-        System.out.println("\n----- PRUEBA ListaCircular -----");
-
-        ListaCircular<Alumno> lista = new ListaCircular<>();
-
-        System.out.println("isEmpty inicial: " + lista.isEmpty());
-        System.out.println("getSize inicial: " + lista.getSize());
-        System.out.println("get(a1) vacía: " + lista.get(a1));
-        System.out.println("del(a1) vacía: " + lista.del(a1));
-
-        lista.add(a1);
-        lista.add(a2);
-        lista.add(a3);
-
-        System.out.print("ListaCircular tras add: ");
-        imprimirIteradorCircular(lista.iteratorCircular());
-
-        System.out.println("get(a2): " + lista.get(a2));
-        System.out.println("getSize: " + lista.getSize());
-
-        System.out.println("del(a1): " + lista.del(a1));
-        System.out.print("Tras del(a1): ");
-        imprimirIteradorCircular(lista.iteratorCircular());
-
-        System.out.println("del(a3): " + lista.del(a3));
-        System.out.print("Tras del(a3): ");
-        imprimirIteradorCircular(lista.iteratorCircular());
-
-        System.out.println("del(a2): " + lista.del(a2));
-        System.out.print("Tras del(a2): ");
-        imprimirIteradorCircular(lista.iteratorCircular());
-
-        System.out.println("isEmpty final: " + lista.isEmpty());
-    }
-
-    // =========================
-    // ITERADOR SE
-    // =========================
-    public static void probarIteradorSE(Alumno a1, Alumno a2, Alumno a3) {
-        System.out.println("\n----- PRUEBA IteradorSE -----");
-
+        // Creamos nodos manualmente para probar el iterador
         ElementoSE<Alumno> e1 = new ElementoSE<>(a1);
         ElementoSE<Alumno> e2 = new ElementoSE<>(a2);
         ElementoSE<Alumno> e3 = new ElementoSE<>(a3);
 
+        // Probamos getters
+        System.out.println(e1.getDato());
+        System.out.println(e1.getSiguiente());
+
+        // Enlazamos los nodos
         e1.setSiguiente(e2);
         e2.setSiguiente(e3);
 
-        IteradorSE<Alumno> it = new IteradorSE<>(e1);
+        // Probamos el iterador simple
+        IteradorSE<Alumno> itSE = new IteradorSE<>(e1);
+        System.out.println(itSE.hasNext());
+        System.out.println(itSE.next());
+        System.out.println(itSE.next());
+        System.out.println(itSE.next());
+        System.out.println(itSE.hasNext());
+        System.out.println(itSE.next());
 
-        System.out.println("hasNext inicial: " + it.hasNext());
-        System.out.println("next(): " + it.next());
-        System.out.println("next(): " + it.next());
-        System.out.println("next(): " + it.next());
-        System.out.println("hasNext final: " + it.hasNext());
-        System.out.println("next() sin elementos: " + it.next());
-    }
+        // === ITERADOR DOBLE ====
+        System.out.println("\n===== ITERADOR DE =====");
 
-    // =========================
-    // ITERADOR DE
-    // =========================
-    public static void probarIteradorDE(Alumno a1, Alumno a2, Alumno a3) {
-        System.out.println("\n----- PRUEBA IteradorDE -----");
+        // Creamos nodos dobles
+        ElementoDE<Alumno> d1 = new ElementoDE<>(a1);
+        ElementoDE<Alumno> d2 = new ElementoDE<>(a2);
+        ElementoDE<Alumno> d3 = new ElementoDE<>(a3);
 
-        ElementoDE<Alumno> e1 = new ElementoDE<>(a1);
-        ElementoDE<Alumno> e2 = new ElementoDE<>(a2);
-        ElementoDE<Alumno> e3 = new ElementoDE<>(a3);
+        // Probamos getters
+        System.out.println(d1.getDato());
+        System.out.println(d1.getAnterior());
+        System.out.println(d1.getSiguiente());
 
-        e1.setSiguiente(e2);
-        e2.setAnterior(e1);
-        e2.setSiguiente(e3);
-        e3.setAnterior(e2);
+        // Enlazamos los nodos
+        d1.setSiguiente(d2);
+        d2.setAnterior(d1);
+        d2.setSiguiente(d3);
+        d3.setAnterior(d2);
 
-        IteradorDE<Alumno> it = new IteradorDE<>(e1);
+        // Comprobamos enlaces
+        System.out.println(d1.getSiguiente().getDato());
+        System.out.println(d2.getAnterior().getDato());
 
-        System.out.println("hasNext inicial: " + it.hasNext());
-        System.out.println("next(): " + it.next());
-        System.out.println("next(): " + it.next());
-        System.out.println("next(): " + it.next());
-        System.out.println("hasNext final: " + it.hasNext());
-        System.out.println("next() sin elementos: " + it.next());
-    }
+        // Probamos el iterador doble
+        IteradorDE<Alumno> itDE = new IteradorDE<>(d1);
+        System.out.println(itDE.hasNext());
+        System.out.println(itDE.next());
+        System.out.println(itDE.next());
+        System.out.println(itDE.next());
+        System.out.println(itDE.hasNext());
+        System.out.println(itDE.next());
 
-    // =========================
-    // ITERADOR CIRCULAR
-    // =========================
-    public static void probarIteradorCircular(Alumno a1, Alumno a2, Alumno a3) {
-        System.out.println("\n----- PRUEBA IteradorCircular -----");
+        // === ITERADOR CIRCULAR ===
+        System.out.println("\n===== ITERADOR CIRCULAR =====");
 
+        // Creamos nodos circulares
         NodoCircular<Alumno> n1 = new NodoCircular<>(a1);
         NodoCircular<Alumno> n2 = new NodoCircular<>(a2);
         NodoCircular<Alumno> n3 = new NodoCircular<>(a3);
 
+        // Probamos acceso a los atributos
+        System.out.println(n1.dato);
+        System.out.println(n1.siguiente);
+
+        // Hacemos la estructura circular
         n1.siguiente = n2;
         n2.siguiente = n3;
         n3.siguiente = n1;
 
-        IteradorCircular<Alumno> it = new IteradorCircular<>(n1);
+        System.out.println(n1.siguiente.dato);
 
-        System.out.println("hasNext inicial: " + it.hasNext());
-        System.out.println("next(): " + it.next());
-        System.out.println("next(): " + it.next());
-        System.out.println("next(): " + it.next());
-        System.out.println("hasNext después de una vuelta: " + it.hasNext());
-        System.out.println("next() cuando ya terminó: " + it.next());
+        // Probamos el iterador circular
+        IteradorCircular<Alumno> itCircular = new IteradorCircular<>(n1);
+        System.out.println(itCircular.hasNext());
+        System.out.println(itCircular.next());
+        System.out.println(itCircular.next());
+        System.out.println(itCircular.next());
+        System.out.println(itCircular.hasNext());
+        System.out.println(itCircular.next());
 
-        it.reset();
-        System.out.println("Tras reset(), hasNext: " + it.hasNext());
-        System.out.println("next() tras reset(): " + it.next());
-    }
+        // Probamos reset()
+        itCircular.reset();
+        System.out.println(itCircular.hasNext());
+        System.out.println(itCircular.next());
 
-    // =========================
-    // COLA
-    // =========================
-    public static void probarCola(Alumno a1, Alumno a2, Alumno a3, Alumno a4) {
-        System.out.println("\n----- PRUEBA Cola -----");
-
+        // === COLA ===
+        System.out.println("\n===== COLA =====");
         Cola<Alumno> cola = new Cola<>();
 
-        System.out.println("isEmpty inicial: " + cola.isEmpty());
-        System.out.println("getSize inicial: " + cola.getSize());
-        System.out.println("peek vacía: " + cola.peek());
-        System.out.println("poll vacía: " + cola.poll());
-        System.out.println("last vacía: " + cola.last());
-        System.out.println("contains(a1) vacía: " + cola.contains(a1));
-        System.out.println("min vacía: " + cola.min());
-        System.out.println("max vacía: " + cola.max());
-        System.out.println("toString vacía: " + cola.toString());
+        // Probamos métodos con la cola vacía
+        System.out.println(cola.isEmpty());
+        System.out.println(cola.getSize());
+        System.out.println(cola.peek());
+        System.out.println(cola.poll());
+        System.out.println(cola.last());
+        System.out.println(cola.contains(a1));
+        System.out.println(cola.min());
+        System.out.println(cola.max());
+        System.out.println(cola.toString());
 
+        // Añadimos elementos a la cola
         cola.offer(a1);
         cola.offer(a2);
         cola.offer(a3);
         cola.offer(a4);
 
-        System.out.println("Tras offer(a1,a2,a3,a4): " + cola);
-        System.out.println("peek(): " + cola.peek());
-        System.out.println("last(): " + cola.last());
-        System.out.println("getSize(): " + cola.getSize());
-        System.out.println("contains(a2): " + cola.contains(a2));
-        System.out.println("contains(new Alumno): " + cola.contains(new Alumno("999Z", "Otro", 5.0)));
-        System.out.println("min(): " + cola.min());
-        System.out.println("max(): " + cola.max());
+        // Probamos todos los métodos importantes
+        System.out.println(cola);
+        System.out.println(cola.peek());
+        System.out.println(cola.last());
+        System.out.println(cola.getSize());
+        System.out.println(cola.contains(a2));
+        System.out.println(cola.contains(a5));
+        System.out.println(cola.min());
+        System.out.println(cola.max());
 
+        // Giramos la cola
         cola.rotate(1);
-        System.out.println("Tras rotate(1): " + cola);
+        System.out.println(cola);
 
         cola.rotate(2);
-        System.out.println("Tras rotate(2): " + cola);
+        System.out.println(cola);
 
-        Cola<Alumno> copia = cola.copy();
-        System.out.println("copy(): " + copia);
+        // Hacemos una copia
+        Cola<Alumno> copiaCola = cola.copy();
+        System.out.println(copiaCola);
 
-        System.out.println("poll(): " + cola.poll());
-        System.out.println("Tras poll(): " + cola);
+        // Sacamos un elemento
+        System.out.println(cola.poll());
+        System.out.println(cola);
 
+        // Vaciamos la cola
         cola.clear();
-        System.out.println("Tras clear(): " + cola);
-        System.out.println("isEmpty final: " + cola.isEmpty());
-    }
+        System.out.println(cola);
+        System.out.println(cola.isEmpty());
 
-    // =========================
-    // PILA
-    // =========================
-    public static void probarPila(Alumno a1, Alumno a2, Alumno a3, Alumno a4) {
-        System.out.println("\n----- PRUEBA Pila -----");
-
+        // === PILA ===
+        System.out.println("\n===== PILA =====");
         Pila<Alumno> pila = new Pila<>();
 
-        System.out.println("isEmpty inicial: " + pila.isEmpty());
-        System.out.println("getSize inicial: " + pila.getSize());
-        System.out.println("peek vacía: " + pila.peek());
-        System.out.println("pop vacía: " + pila.pop());
-        System.out.println("bottom vacía: " + pila.bottom());
-        System.out.println("contains(a1) vacía: " + pila.contains(a1));
-        System.out.println("search(a1) vacía: " + pila.search(a1));
-        System.out.println("min vacía: " + pila.min());
-        System.out.println("max vacía: " + pila.max());
-        System.out.println("toString vacía: " + pila.toString());
+        // Probamos métodos con la pila vacía
+        System.out.println(pila.isEmpty());
+        System.out.println(pila.getSize());
+        System.out.println(pila.peek());
+        System.out.println(pila.pop());
+        System.out.println(pila.bottom());
+        System.out.println(pila.contains(a1));
+        System.out.println(pila.search(a1));
+        System.out.println(pila.min());
+        System.out.println(pila.max());
+        System.out.println(pila.toString());
 
+        // Añadimos elementos a la pila
         pila.push(a1);
         pila.push(a2);
         pila.push(a3);
         pila.push(a4);
 
-        System.out.println("Tras push(a1,a2,a3,a4): " + pila);
-        System.out.println("peek(): " + pila.peek());
-        System.out.println("bottom(): " + pila.bottom());
-        System.out.println("getSize(): " + pila.getSize());
-        System.out.println("contains(a3): " + pila.contains(a3));
-        System.out.println("contains(new Alumno): " + pila.contains(new Alumno("999Z", "Otro", 5.0)));
-        System.out.println("search(a4): " + pila.search(a4));
-        System.out.println("search(a2): " + pila.search(a2));
-        System.out.println("search(a1): " + pila.search(a1));
-        System.out.println("search(new Alumno): " + pila.search(new Alumno("999Z", "Otro", 5.0)));
-        System.out.println("min(): " + pila.min());
-        System.out.println("max(): " + pila.max());
+        // Probamos todos los métodos principales
+        System.out.println(pila);
+        System.out.println(pila.peek());
+        System.out.println(pila.bottom());
+        System.out.println(pila.getSize());
+        System.out.println(pila.contains(a3));
+        System.out.println(pila.contains(a5));
+        System.out.println(pila.search(a4));
+        System.out.println(pila.search(a2));
+        System.out.println(pila.search(a1));
+        System.out.println(pila.search(a5));
+        System.out.println(pila.min());
+        System.out.println(pila.max());
 
-        Pila<Alumno> copia = pila.copy();
-        System.out.println("copy(): " + copia);
+        // Hacemos una copia
+        Pila<Alumno> copiaPila = pila.copy();
+        System.out.println(copiaPila);
 
-        System.out.println("pop(): " + pila.pop());
-        System.out.println("Tras pop(): " + pila);
+        // Sacamos el elemento de arriba
+        System.out.println(pila.pop());
+        System.out.println(pila);
 
+        // Invertimos la pila
         pila.reverse();
-        System.out.println("Tras reverse(): " + pila);
+        System.out.println(pila);
 
+        // Vaciamos la pila
         pila.clear();
-        System.out.println("Tras clear(): " + pila);
-        System.out.println("isEmpty final: " + pila.isEmpty());
-    }
-
-    // =========================
-    // AUXILIARES
-    // =========================
-    public static <T> void imprimirIterador(MiIterador<T> it) {
-        System.out.print("[");
-        boolean primero = true;
-
-        while (it.hasNext()) {
-            if (!primero) {
-                System.out.print(", ");
-            }
-            System.out.print(it.next());
-            primero = false;
-        }
-
-        System.out.println("]");
-    }
-
-    public static <T> void imprimirIteradorCircular(InterfazIteradorCircular<T> it) {
-        System.out.print("[");
-        boolean primero = true;
-
-        while (it.hasNext()) {
-            if (!primero) {
-                System.out.print(", ");
-            }
-            System.out.print(it.next());
-            primero = false;
-        }
-
-        System.out.println("]");
+        System.out.println(pila);
+        System.out.println(pila.isEmpty());
     }
 }
