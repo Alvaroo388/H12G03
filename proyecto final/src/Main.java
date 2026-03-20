@@ -45,7 +45,7 @@ public class Main {
             System.out.println(it2.next());
         }
 
-        // ================= LISTA DOBLE =================
+        // ===LISTA DOBLE ===
         System.out.println("\n===== LISTA DE =====");
         ListaDE<Alumno> listaDE = new ListaDE<>();
 
