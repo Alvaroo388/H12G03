@@ -1,0 +1,159 @@
+@startuml
+skinparam linetype ortho
+top to bottom direction
+
+title Proyecto Estructuras de Datos
+
+interface Lista<T> {
+  +add(dato: T)
+  +get(dato: T): T
+  +del(dato: T): T
+  +isEmpty(): boolean
+  +getSize(): int
+  +getIterador(): MiIterador<T>
+}
+
+interface MiIterador<T> {
+  +hasNext(): boolean
+  +next(): T
+}
+
+interface InterfazListaCircular<T> {
+  +add(dato: T)
+  +get(dato: T): T
+  +del(dato: T): T
+  +isEmpty(): boolean
+  +getSize(): int
+  +iteratorCircular(): InterfazIteradorCircular<T>
+}
+
+interface InterfazIteradorCircular<T> {
+  +hasNext(): boolean
+  +next(): T
+  +reset(): void
+}
+
+interface Pilas<T> {
+  +push(dato: T)
+  +pop(): T
+  +peek(): T
+  +clear(): void
+}
+
+interface Colas<T> {
+  +offer(dato: T)
+  +poll(): T
+  +peek(): T
+  +clear(): void
+}
+
+class Alumno {
+  -dni: String
+  -nombre: String
+  -notaMedia: double
+}
+
+class Main
+
+class ListaSE<T> {
+  #primero: ElementoSE<T>
+  #size: int
+  +existeDato(dato: T): boolean
+  +invertir(): void
+}
+
+class ListaDE<T> {
+  #primero: ElementoDE<T>
+  #ultimo: ElementoDE<T>
+  #size: int
+  +existeDato(dato: T): boolean
+}
+
+class ListaCircular<T> {
+  #primero: NodoCircular<T>
+  #ultimo: NodoCircular<T>
+  #tamano: int
+}
+
+class IteradorSE<T> {
+  -actual: ElementoSE<T>
+}
+
+class IteradorDE<T> {
+  -actual: ElementoDE<T>
+}
+
+class IteradorCircular<T> {
+  -primero: NodoCircular<T>
+  -actual: NodoCircular<T>
+  -primeraVuelta: boolean
+}
+
+class ElementoSE<T> {
+  -dato: T
+  -siguiente: ElementoSE<T>
+}
+
+class ElementoDE<T> {
+  #dato: T
+  #anterior: ElementoDE<T>
+  #siguiente: ElementoDE<T>
+}
+
+class NodoCircular<T> {
+  #dato: T
+  #siguiente: NodoCircular<T>
+}
+
+class Pila<T> {
+  +bottom(): T
+  +reverse(): void
+  +search(dato: T): int
+  +copy(): Pila<T>
+  +min(): T
+  +max(): T
+}
+
+class Cola<T> {
+  +last(): T
+  +rotate(times: int): void
+  +copy(): Cola<T>
+  +min(): T
+  +max(): T
+}
+
+interface "Comparable<Alumno>" as ComparableAlumno
+
+Alumno ..|> ComparableAlumno
+
+ListaSE ..|> Lista
+ListaDE ..|> Lista
+ListaCircular ..|> InterfazListaCircular
+
+IteradorSE ..|> MiIterador
+IteradorDE ..|> MiIterador
+IteradorCircular ..|> InterfazIteradorCircular
+
+Pila --|> ListaDE
+Cola --|> ListaDE
+Pila ..|> Pilas
+Cola ..|> Colas
+
+ListaSE *-- ElementoSE : contiene
+ListaDE *-- ElementoDE : contiene
+ListaCircular *-- NodoCircular : contiene
+
+IteradorSE --> ElementoSE : recorre
+IteradorDE --> ElementoDE : recorre
+IteradorCircular --> NodoCircular : recorre
+
+ListaSE ..> IteradorSE : crea
+ListaDE ..> IteradorDE : crea
+ListaCircular ..> IteradorCircular : crea
+
+Main ..> Alumno : usa
+Main ..> Lista : usa
+Main ..> Pilas : usa
+Main ..> Colas : usa
+Main ..> InterfazListaCircular : usa
+@enduml
