@@ -165,7 +165,7 @@ public class Main {
         System.out.println(itDE.next());
 
         // === ITERADOR CIRCULAR ===
-        System.out.println("\n===== ITERADOR CIRCULAR =====");
+        System.out.println("\n=== ITERADOR CIRCULAR ===");
 
         // Creamos nodos circulares
         NodoCircular<Alumno> n1 = new NodoCircular<>(a1);
