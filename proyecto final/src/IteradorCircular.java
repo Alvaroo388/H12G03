@@ -1,16 +1,33 @@
-// Clase que implementa un iterador para recorrer una lista circular
+/*
+ * Esta clase implementa un iterador circular para recorrer una lista circular.
+ * Permite avanzar nodo a nodo y, al llegar al final, controla que no se repita
+ * indefinidamente el recorrido completo.
+ */
 public class IteradorCircular<T extends Comparable<T>> implements InterfazIteradorCircular<T> {
 
-    // Guarda la referencia al primer nodo de la lista
+    /*
+     * Referencia al primer nodo de la lista.
+     * Se usa para saber dónde empieza la lista y detectar
+     * cuándo hemos dado una vuelta completa.
+     */
     private NodoCircular<T> primero;
 
-    // Nodo en el que está actualmente el iterador
+    /*
+     * Nodo actual en el que se encuentra el iterador.
+     * Va avanzando conforme se llama a next().
+     */
     private NodoCircular<T> actual;
 
-    // Sirve para controlar si ya se ha dado la primera vuelta
+    /*
+     * Indica si estamos en la primera vuelta del recorrido.
+     * Sirve para permitir empezar desde el principio sin cortar el recorrido.
+     */
     private boolean primeraVuelta;
 
-    // Constructor del iterador
+    /*
+     * Constructor del iterador.
+     * Inicializa el iterador apuntando al primer nodo de la lista.
+     */
     public IteradorCircular(NodoCircular<T> primero) {
         this.primero = primero;
         this.actual = primero;
@@ -19,30 +36,50 @@ public class IteradorCircular<T extends Comparable<T>> implements InterfazIterad
 
     @Override
     public boolean hasNext() {
-        // Si la lista está vacía, no hay elementos que recorrer
+
+        /*
+         * Si la lista está vacía (no hay nodos),
+         * no hay nada que recorrer.
+         */
         if (actual == null) {
             return false;
         }
 
-        // Se puede seguir mientras no hayamos vuelto al inicio
-        // después de recorrer toda la lista
+        /*
+         * Podemos seguir avanzando si:
+         * - Estamos en la primera vuelta, o
+         * - Aún no hemos vuelto al nodo inicial.
+         *
+         * Esto evita recorrer la lista en bucle infinito.
+         */
         return primeraVuelta || actual != primero;
     }
 
     @Override
     public T next() {
-        // Si no hay siguiente elemento, devolvemos null
+
+        /*
+         * Si no hay más elementos disponibles,
+         * devolvemos null.
+         */
         if (!hasNext()) {
             return null;
         }
 
-        // Guardamos el dato del nodo actual
+        /*
+         * Guardamos el dato del nodo actual
+         * antes de avanzar.
+         */
         T dato = actual.dato;
 
-        // Avanzamos al siguiente nodo
+        /*
+         * Pasamos al siguiente nodo de la lista.
+         */
         actual = actual.siguiente;
 
-        // Marcamos que ya hemos empezado a recorrer la lista
+        /*
+         * Indicamos que ya hemos comenzado el recorrido.
+         */
         primeraVuelta = false;
 
         return dato;
@@ -50,7 +87,12 @@ public class IteradorCircular<T extends Comparable<T>> implements InterfazIterad
 
     @Override
     public void reset() {
-        // Volvemos a colocar el iterador al principio
+
+        /*
+         * Reiniciamos el iterador:
+         * volvemos al primer nodo y marcamos
+         * que es la primera vuelta otra vez.
+         */
         actual = primero;
         primeraVuelta = true;
     }
