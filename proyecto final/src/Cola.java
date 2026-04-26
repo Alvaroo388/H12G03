@@ -25,10 +25,10 @@ public class Cola<T extends Comparable<T>>extends ListaDE<T> implements Colas<T>
         return primero.dato;
     }
     /**
+     /**
      * Inserta un nuevo elemento al final de la cola.
-     *Se reutiliza el método add() de la clase padre,
-     * que inserta el elemento al final de la lista.
-     * El parámetros es el dato  del elemento que se desea añadir.
+     * Si la cola está vacía, el nuevo nodo pasa a ser el primero y el último.
+     * Si no está vacía, el nuevo nodo se enlaza detrás del último.
      */
 
     @Override
