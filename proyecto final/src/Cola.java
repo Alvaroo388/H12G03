@@ -33,7 +33,18 @@ public class Cola<T extends Comparable<T>>extends ListaDE<T> implements Colas<T>
 
     @Override
     public void offer(T dato){
-        super.add(dato);
+        ElementoDE<T> nuevo = new ElementoDE<>(dato);
+
+        if (isEmpty()) {
+            primero = nuevo;
+            ultimo = nuevo;
+        } else {
+            ultimo.setSiguiente(nuevo);
+            nuevo.setAnterior(ultimo);
+            ultimo = nuevo;
+        }
+
+        size++;
     }
     /**
      * Extrae y devuelve el elemento situado al frente de la cola.
